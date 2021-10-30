@@ -276,7 +276,8 @@ int dvb_usb_device_init(struct usb_interface *intf,
 
 	d->udev = udev;
 	memcpy(&d->props, props, sizeof(struct dvb_usb_device_properties));
-	d->desc = desc;
+	cold = 0;
+	d->desc = dvb_usb_find_device(udev, &d->props, &cold);
 	d->owner = owner;
 
 	usb_set_intfdata(intf, d);
