@@ -9566,8 +9566,10 @@ static struct file *io_uring_get_file(struct io_ring_ctx *ctx)
 static int io_uring_create(unsigned entries, struct io_uring_params *p,
 			   struct io_uring_params __user *params)
 {
+	struct user_struct* user = NULL;
 	struct io_ring_ctx *ctx;
 	struct file *file;
+	bool limit_mem;
 	int ret;
 
 	if (!entries)
